@@ -3,15 +3,15 @@ const http = require('http');
 const fs = require("fs");
 
 const options = {
-  //key: fs.readFileSync(""),
-  //cert: fs.readFileSync("")
+  key: fs.readFileSync("/etc/letsencrypt/live/www.a4b7f74cc91ae.link/privkey.pem"),
+  cert: fs.readFileSync("/etc/letsencrypt/live/www.a4b7f74cc91ae.link/fullchain.pem")
 }
 
 const port = 443;
 const port2 = 80;
 let content = "";
 
-const server = https.createServer((req, res) => {
+const server = https.createServer(options, (req, res) => {
   console.log(req.url);
   if(req.url === "/api.php/me"){
     content = "test";
