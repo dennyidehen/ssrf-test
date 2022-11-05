@@ -4,6 +4,7 @@ const port = 80;
 let content = "";
 
 const server = http.createServer((req, res) => {
+  console.log(req.url);
   if(req.url === "/api.php/me"){
     content = "test";
   }else if(req.url === "/api.php/meta/modules"){
