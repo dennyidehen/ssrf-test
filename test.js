@@ -1,9 +1,17 @@
+const https = require('https');
 const http = require('http');
+const fs = require("fs");
+
+const options = {
+  //key: fs.readFileSync(""),
+  //cert: fs.readFileSync("")
+}
 
 const port = 443;
+const port2 = 80;
 let content = "";
 
-const server = http.createServer((req, res) => {
+const server = https.createServer((req, res) => {
   console.log(req.url);
   if(req.url === "/api.php/me"){
     content = "test";
@@ -16,6 +24,18 @@ const server = http.createServer((req, res) => {
   res.end(content);
 });
 
+const server2 = http.createServer((req, res) => {
+  console.log(req.url);
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.setHeader('Content-Length', `${content.length}`);
+  res.end("HTTP");
+});
+
 server.listen(port, () => {
   console.log(`Server running on ${port}/`);
+});
+
+server2.listen(port2, () => {
+  console.log(`Server2 running on ${port2}/`);
 });
