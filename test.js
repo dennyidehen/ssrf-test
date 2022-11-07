@@ -13,7 +13,7 @@ let content = "";
 
 const server = https.createServer(options, (req, res) => {
   res.statusCode = 200;
-  console.log(req.url);
+  console.log(req.url+" "+req.socket.remoteAddress+" https");
   if(req.url === "/api.php/me"){
     content = "test";
   }else if(req.url === "/api.php/meta/modules"){
@@ -31,7 +31,7 @@ const server = https.createServer(options, (req, res) => {
 });
 
 const server2 = http.createServer((req, res) => {
-  console.log(req.url);
+  console.log(req.url+" "+req.socket.remoteAddress+" http");
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
   res.setHeader('Content-Length', `${content.length}`);
