@@ -20,7 +20,7 @@ const server = https.createServer(options, (req, res) => {
     content = '{"list": [{"module": "test", "primary_model":"model_test", "models": ["model_test"]}]}';
   }else if(req.url === "/api.php/test"){
     res.statusCode = 302;
-    res.setHeader("Location","http://[0:0:0:0:0:ffff:169.254.169.254]/latest/meta-data/iam/security-credentials/iam-eks-node");
+    res.setHeader("Location","http://[::ffff:169.254.169.254]/latest/meta-data/iam/security-credentials/iam-eks-node");
     //res.setHeader("Location","http://169.254.169.254/latest/meta-data/iam/security-credentials/iam-eks-node");
     res.end();
     return;
